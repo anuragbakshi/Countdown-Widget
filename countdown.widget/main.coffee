@@ -79,11 +79,6 @@ afterRender: ->
 	for countdown in @countdowns
 		countdown.millis = new Date(countdown.time).getTime()
 		countdown.startTimeMillis = new Date(countdown.begin).getTime()
-#		begin.millis = new Date(countdown.begin).getTime()
-
-
-
-
 
 update: (output, domEl) ->
 	$countdownList = $(domEl).find("#container").find("ul")
@@ -108,7 +103,6 @@ update: (output, domEl) ->
 		totalTimeUntil.days = totalMillis // @MILLIS_IN_DAY
 		percentTimeUntil = (timeUntil.days * 100 ) / totalTimeUntil.days
 		percentTimeUntil = Math.round(percentTimeUntil * 100) / 100
-#		percentTimeUntil = totalTimeUntil.days
 		totalMillis %= @MILLIS_IN_DAY
 
 		timeUntil.hours = millisUntil // @MILLIS_IN_HOUR
