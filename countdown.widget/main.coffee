@@ -4,17 +4,17 @@ MILLIS_IN_MINUTE: 60 * 1000
 MILLIS_IN_SECOND: 1000
 
 countdowns: [
-	label: "DEPARTURE Day",
-	begin: "Jan 1, 2016",
-	time: "Jan 1, 2019"
+	label: "New Year's Day"
+	begin: "Jan 1, 2014",
+	time: "Jan 1, 2015"
 ,
-	label: "SALUDFY Ends",
-	begin: "Jan 4, 2016",
-	time: "Apr 15, 2016"
+	label: "UIUC Decision"
+	begin: "Oct 1, 2014",
+	time: "Feb 13, 2015"
 ,
-	label: "Launch Ideaservices Website",
-	begin: "Feb 21, 2016 12:10 PM",
-	time: "Feb 28, 2016 12:10 PM"
+	label: "High School Ends"
+	time: "May 08, 2015 12:10 PM"
+	time: "Jun 18, 2015 12:10 PM"
 ]
 
 command: ""
