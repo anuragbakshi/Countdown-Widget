@@ -4,14 +4,17 @@ MILLIS_IN_MINUTE: 60 * 1000
 MILLIS_IN_SECOND: 1000
 
 countdowns: [
-	label: "New Year's Day"
-	time: "Jan 1, 2015"
+	label: "DEPARTURE Day",
+	begin: "Jan 1, 2016",
+	time: "Jan 1, 2019"
 ,
-	label: "UIUC Decision"
-	time: "Feb 13, 2015"
+	label: "SALUDFY Ends",
+	begin: "Jan 4, 2016",
+	time: "Apr 15, 2016"
 ,
-	label: "High School Ends"
-	time: "Jun 18, 2015 12:10 PM"
+	label: "Launch Ideaservices Website",
+	begin: "Feb 21, 2016 12:10 PM",
+	time: "Feb 28, 2016 12:10 PM"
 ]
 
 command: ""
@@ -28,10 +31,13 @@ style: """
 		margin 10px 10px 15px
 		padding 10px
 		border-radius 5px
+		top: 550px
+		display: block
+		position: relative
 
 		color rgba(#fff, .9)
 		font-family Helvetica Neue
-	
+
 	span
 		font-size 14pt
 		font-weight bold
@@ -67,8 +73,17 @@ render: -> """
 """
 
 afterRender: ->
+#	for start in @countdowns
+#		start.millis = new Date(start.time).getTime()
+
 	for countdown in @countdowns
 		countdown.millis = new Date(countdown.time).getTime()
+		countdown.startTimeMillis = new Date(countdown.begin).getTime()
+#		begin.millis = new Date(countdown.begin).getTime()
+
+
+
+
 
 update: (output, domEl) ->
 	$countdownList = $(domEl).find("#container").find("ul")
@@ -78,12 +93,23 @@ update: (output, domEl) ->
 
 	# $root.html new Date
 	# $root.html new Date @countdowns[1].time
+
 	for countdown in @countdowns
+		totalMillis =  countdown.millis - countdown.startTimeMillis
+		totalTimeUntil = {}
+		percentTimeUntil = {}
+
 		millisUntil = countdown.millis - now
 		timeUntil = {}
 
 		timeUntil.days = millisUntil // @MILLIS_IN_DAY
 		millisUntil %= @MILLIS_IN_DAY
+
+		totalTimeUntil.days = totalMillis // @MILLIS_IN_DAY
+		percentTimeUntil = (timeUntil.days * 100 ) / totalTimeUntil.days
+		percentTimeUntil = Math.round(percentTimeUntil * 100) / 100
+#		percentTimeUntil = totalTimeUntil.days
+		totalMillis %= @MILLIS_IN_DAY
 
 		timeUntil.hours = millisUntil // @MILLIS_IN_HOUR
 		millisUntil %= @MILLIS_IN_HOUR
@@ -100,6 +126,7 @@ update: (output, domEl) ->
 				<table>
 					<thead>
 						<tr>
+							<td>PERC. LEFT</td>
 							<td>DAYS</td>
 							<td>HOURS</td>
 							<td>MINUTES</td>
@@ -109,6 +136,7 @@ update: (output, domEl) ->
 
 					<tbody>
 						<tr>
+							<td>#{percentTimeUntil}%</td>
 							<td>#{timeUntil.days}</td>
 							<td>#{timeUntil.hours}</td>
 							<td>#{timeUntil.minutes}</td>
